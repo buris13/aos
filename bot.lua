@@ -61,14 +61,17 @@ function decideNextAction()
   local directionKey = tostring(dx) .. "," .. tostring(dy)
   local direction = directionMap[directionKey]
 
-  if targetInRange then
+  if targetInRange and protagonist.energy > 5 then
     print(colors.red .. "Attacking nearby player" .. colors.reset)
     ao.send({Target = Game, Action = "PlayerAttack", AttackEnergy = tostring(protagonist.energy)})
+  elseif direction and targetInRange and protagonist.energy <= 5 then
+    print(colors.red .. "I need to rest, let me fly away to " ..direction .. "(" .. protagonist.x .. ", " .. protagonist.y .. ")" .. colors.reset)
+    ao.send({Target = Game, Action = "PlayerMove", Player = ao.id, Direction = direction})
   elseif direction then
-      print(colors.blue .. "Moving " .. direction .. " to (" .. protagonist.x .. ", " .. protagonist.y .. ")" .. colors.reset)
-      ao.send({Target = Game, Action = "PlayerMove", Player = ao.id, Direction = direction})
+    print(colors.blue .. "Moving " .. direction .. " to (" .. protagonist.x .. ", " .. protagonist.y .. ")" .. colors.reset)
+    ao.send({Target = Game, Action = "PlayerMove", Player = ao.id, Direction = direction})
   else
-      print(colors.gray .. "No valid direction found for movement." .. colors.reset)
+    print(colors.gray .. "No valid direction found for movement." .. colors.reset)
   end
 
   InAction = false -- Reset InAction flag after performing the action
