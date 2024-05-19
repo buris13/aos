@@ -110,7 +110,7 @@ Handlers.add(
 Handlers.add(
   "Reregister",
   Handlers.utils.hasMatchingTag("Action", "Ejected"),
-  function ()
+  function (msg)
       print(colors.green .. "Reregister.." .. colors.reset)
       ao.send({Target = Game, Action = "Register"})
   end
