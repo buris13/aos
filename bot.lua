@@ -116,6 +116,15 @@ Handlers.add(
   end
 )
 
+--- Jika telah menyerang
+Handlers.add(
+  "SuccessfulAtack",
+  Handlers.utils.hasMatchingTag("Action", "Successful-Hit"),
+  function ()
+    print(colors.red .. "You almost die madafaka!!!" .. colors.reset)
+  end
+)
+
 -- Handler to automate payment confirmation when waiting period starts.
 Handlers.add(
   "AutoPay",
