@@ -128,6 +128,23 @@ Handlers.add(
   end
 )
 
+-- Pembayaran
+Handlers.add(
+  "Debit",
+  Handlers.utils.hasMatchingTag("Action", "Debit-Notice"),
+  function ()
+    print(colors.blue .. "Take my money, and let me play" .. colors.reset)
+  end
+)
+
+Handlers.add(
+  "Payment",
+  Handlers.utils.hasMatchingTag("Action", "Payment-Received"),
+  function ()
+    print(colors.blue .. "Waiting the rumbling, LFG!!!" .. colors.reset)
+  end
+)
+
 -- Handler to automate payment confirmation when waiting period starts.
 Handlers.add(
   "AutoPay",
