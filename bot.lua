@@ -132,8 +132,9 @@ Handlers.add(
 Handlers.add(
   "Debit",
   Handlers.utils.hasMatchingTag("Action", "Debit-Notice"),
-  function ()
-    print(colors.blue .. "Take my money, and let me play" .. colors.reset)
+  function (msg)
+    print(colors.blue .. "Take my money, and let me play \'Reseting the state\'" .. colors.reset)
+    ao.send({Target = Game, Action = "GetGameState"})  --reset state
   end
 )
 
